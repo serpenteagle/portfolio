@@ -16,6 +16,10 @@
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-flip-toolkit": "^7.0.7",
+    "react-spring": "^8.0.27",
+    "shortid": "^2.2.15",
+    "style-inject": "^0.3.0",
     "styled-components": "^4.4.1"
   }
 }
