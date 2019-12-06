@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Shashank Rajesh</title>
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #container {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #border {
+        --margin: 20px;
+        height: calc(100% - 2 * var(--margin));
+        border: 14px solid black;
+        box-sizing: border-box;
+        margin: var(--margin);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+      }
+
+      #message {
+        font-family: 'Space Grotesk';
+        font-size: 35px;
+        text-align: center;
+      }
+
+      #message > strong {
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="border">
+        <p id="message">
+          work in progress...<br />please come back on<br /><strong
+            >Mon 12/09/2019</strong
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
