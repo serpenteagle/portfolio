@@ -24,7 +24,7 @@ const Container = styled.div`
         `}
 `;
 
-const GridItem = props => {
+const GridItem = React.forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const flipperClass = shortid.generate();
 
@@ -36,17 +36,22 @@ const GridItem = props => {
       width: 100%;
     }
 `;
-styleInject(flipperStyle);
+  styleInject(flipperStyle);
 
   return (
-    <Flipper flipKey={open} className={flipperClass}>
-      <Flipped flipId={'flipped'}>
-        <Container onClick={() => setOpen(!open)} open={open}>
-          {props.children}
-        </Container>
-      </Flipped>
-    </Flipper>
+    <Container {...props} ref={ref} open={open}>
+      {props.children}
+    </Container>
   );
-};
+  // return (
+  // <Flipper flipKey={open} className={flipperClass}>
+  // <Flipped flipId={'flipped'}>
+  // <Container {...props} onClick={() => setOpen(!open)} open={open}>
+  // {props.children}
+  // </Container>
+  // </Flipped>
+  // </Flipper>
+  // );
+});
 
 export default GridItem;
