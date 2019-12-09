@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import anime from 'animejs';
 import shortid from 'shortid';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import GridItem from './components/GridItem/GridItem.js';
 
@@ -13,7 +14,23 @@ const Viewport = styled.div`
   left: 0;
   right: 0;
   perspective: 18in;
-  overflow: scroll;
+  overflow-y: scroll;
+`;
+const RouterScreen = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  opacity: 0;
+  pointer-events: none;
+`;
+const RouterTest = styled.div`
+  height: 300px;
+  width: 300px;
+  background-color: ${({bgColor}) => bgColor};
+  opacity: ${({start}) => (start ? 1 : 0)};
 `;
 const Container = styled.div``;
 const Border = styled.div`
@@ -21,18 +38,6 @@ const Border = styled.div`
   margin: 26px;
   border-radius: 19px;
   text-align: center;
-`;
-const Shade = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: black;
-  transition: opacity 0.5s;
-  opacity: ${({on}) => (on ? '.75' : '0')};
-  z-index: ${({on}) => (on ? 1000 : 'initial')};
-  pointer-events: none;
 `;
 const Title = styled.h1`
   font-family: 'Space Grotesk';
@@ -87,18 +92,12 @@ const App = props => {
     {id: shortid.generate(), ref: useRef(null)},
     {id: shortid.generate(), ref: useRef(null)},
   ]);
-  const [test, setTest] = useState(false);
   const [open, setOpen] = useState(null);
+  const [start, setStart] = useState(null);
 
   const containerRef = useRef(null);
+  const routerScreenRef = useRef(null);
 
-  useEffect(() => {
-    anime({
-      targets: containerRef.current,
-      duration: 1000,
-      opacity: test ? 0.5 : 1,
-    });
-  }, [test]);
   useEffect(() => {
     console.log('effect');
     if (open) {
@@ -110,11 +109,18 @@ const App = props => {
       const b = [rect.left + rect.width / 2, rect.top + rect.height / 2];
 
       anime({
+        begin: () => setTimeout(() => setStart(true), 2000),
         targets: containerRef.current,
         translateX: `+=${a[0] - b[0]}`,
         translateY: `+=${a[1] - b[1]}`,
-        translateZ: '400px',
-        duration: 1000,
+        translateZ: '800px',
+        duration: 750,
+        easing: 'easeInOutQuart',
+      });
+      anime({
+        targets: routerScreenRef.current,
+        opacity: 1,
+        duration: 750,
         easing: 'easeInOutQuart',
       });
     } else {
@@ -123,8 +129,15 @@ const App = props => {
         translateX: 0,
         translateY: 0,
         translateZ: 0,
-        duration: 1000,
+        duration: 750,
         easing: 'easeInOutQuart',
+      });
+      anime({
+        targets: routerScreenRef.current,
+        opacity: 0,
+        duration: 750,
+        easing: 'easeInOutQuart',
+        end: () => setStart(null),
       });
     }
   }, [open]);
@@ -132,7 +145,6 @@ const App = props => {
   return (
     <Viewport>
       <Container ref={containerRef}>
-        <Shade />
         <Border>
           <Title>
             <Highlight>Shashank Rajesh</Highlight>
@@ -163,6 +175,18 @@ const App = props => {
           </Body>
         </Border>
       </Container>
+      <BrowserRouter>
+        <RouterScreen ref={routerScreenRef}>
+          <Switch>
+            <Route path="/">
+              <RouterTest bgColor="green" start={start} />
+            </Route>
+            <Route path="/two">
+              <RouterTest bgColor="blue" start={start} />
+            </Route>
+          </Switch>
+        </RouterScreen>
+      </BrowserRouter>
     </Viewport>
   );
 };
