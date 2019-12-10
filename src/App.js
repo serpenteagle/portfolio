@@ -6,38 +6,35 @@ import shortid from 'shortid';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import GridItem from './components/GridItem/GridItem.js';
+import ProjectTemplate from './components/ProjectTemplate/ProjectTemplate.js';
 
-const Viewport = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  perspective: 18in;
-  overflow-y: scroll;
-`;
-const RouterScreen = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  opacity: 0;
-  pointer-events: none;
-`;
-const RouterTest = styled.div`
-  height: 300px;
-  width: 300px;
-  background-color: ${({bgColor}) => bgColor};
-  opacity: ${({start}) => (start ? 1 : 0)};
-`;
+import boschContent from './content/bosch.js';
+console.log(boschContent);
+
 const Container = styled.div``;
 const Border = styled.div`
+  boz-sizing: border-box;
   border: 16px solid black;
   margin: 26px;
   border-radius: 19px;
   text-align: center;
+`;
+const RouterScreen = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  pointer-events: ${({go}) => (go ? 'auto' : 'none')};
+  opacity: 0;
+  overflow-y: scroll;
+`;
+const RouterTest = styled.div`
+  height: 3000px;
+  width: 300px;
+  background-color: ${({bgColor}) => bgColor};
+  opacity: ${({go}) => (go ? 1 : 0)};
 `;
 const Title = styled.h1`
   font-family: 'Space Grotesk';
@@ -52,7 +49,7 @@ const Highlight = styled.mark`
   padding-bottom: 52px;
 `;
 
-const Body = styled.p`
+const Text = styled.p`
   display: inline-block;
   text-align: center;
   width: 1000px;
@@ -78,7 +75,6 @@ const Grid = styled.div`
   grid-gap: 10px;
   height: 900px;
   width: 900px;
-  background-color: blue;
 `;
 
 const App = props => {
@@ -93,15 +89,13 @@ const App = props => {
     {id: shortid.generate(), ref: useRef(null)},
   ]);
   const [open, setOpen] = useState(null);
-  const [start, setStart] = useState(null);
+  const [go, setGo] = useState(null);
 
   const containerRef = useRef(null);
   const routerScreenRef = useRef(null);
 
   useEffect(() => {
-    console.log('effect');
     if (open) {
-      console.log(open);
       const el = gridItems.find(el => el.id === open).ref.current;
       const rect = el.getBoundingClientRect();
 
@@ -109,7 +103,7 @@ const App = props => {
       const b = [rect.left + rect.width / 2, rect.top + rect.height / 2];
 
       anime({
-        begin: () => setTimeout(() => setStart(true), 2000),
+        begin: () => setTimeout(() => setGo(true), 500),
         targets: containerRef.current,
         translateX: `+=${a[0] - b[0]}`,
         translateY: `+=${a[1] - b[1]}`,
@@ -129,31 +123,32 @@ const App = props => {
         translateX: 0,
         translateY: 0,
         translateZ: 0,
-        duration: 750,
-        easing: 'easeInOutQuart',
+        duration: 1000,
+        easing: 'easeInOutQuint',
       });
       anime({
         targets: routerScreenRef.current,
         opacity: 0,
         duration: 750,
-        easing: 'easeInOutQuart',
-        end: () => setStart(null),
+        easing: 'easeInOutQuint',
+        complete: () => setGo(false),
       });
     }
   }, [open]);
 
   return (
-    <Viewport>
+    <React.Fragment>
       <Container ref={containerRef}>
         <Border>
           <Title>
             <Highlight>Shashank Rajesh</Highlight>
           </Title>
-          <Body>
+
+          <Text>
             Self taught front-end developer with a background in robotics
             engineering. Having a keen attention to detail and an obsession with
             aesthetics, something something, something something.
-          </Body>
+          </Text>
 
           <GridWrapper>
             <Grid>
@@ -170,24 +165,26 @@ const App = props => {
           </GridWrapper>
 
           <Divider />
-          <Body>
+
+          <Text>
             ShashankRajesh7@gmail.com &nbsp;&nbsp;&nbsp;&nbsp; 248-567-9425
-          </Body>
+          </Text>
         </Border>
       </Container>
+
       <BrowserRouter>
-        <RouterScreen ref={routerScreenRef}>
+        <RouterScreen go={go} ref={routerScreenRef}>
           <Switch>
             <Route path="/">
-              <RouterTest bgColor="green" start={start} />
+              <ProjectTemplate content={boschContent} onBack={() => setOpen(null)} go={go} />
             </Route>
             <Route path="/two">
-              <RouterTest bgColor="blue" start={start} />
+              <RouterTest bgColor="blue" go={go} />
             </Route>
           </Switch>
         </RouterScreen>
       </BrowserRouter>
-    </Viewport>
+    </React.Fragment>
   );
 };
 
