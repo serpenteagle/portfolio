@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import styleInject from 'style-inject';
 
 const Container = styled.div`
-  background-color: red;
+  background-color: lightgrey;
   border-radius: 2px;
 
   ${({open}) =>
