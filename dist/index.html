@@ -7,13 +7,33 @@
     <title>Shashank Rajesh</title>
 
     <style>
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/assets/fonts/SpaceGrotesk-Regular.woff') format('woff');
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/assets/fonts/SpaceGrotesk-Medium.woff') format('woff');
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/assets/fonts/SpaceGrotesk-SemiBold.woff') format('woff');
+        font-weight: 600;
+      }
+
       body {
         margin: 0;
         padding: 0;
         perspective: 18in;
         overflow: hidden;
+        transform-style: preserve-3d;
       }
       #root {
+        transform-style: preserve-3d;
         height: 100vh;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -22,7 +42,6 @@
   </head>
   <body>
     <div id="root"></div>
-
     <script src="bundle.js"></script>
   </body>
 </html>

@@ -1,57 +1,53 @@
 import React, {useState, useRef, useEffect} from 'react';
 import styled, {css} from 'styled-components';
-import {Flipper, Flipped} from 'react-flip-toolkit';
-import shortid from 'shortid';
-import styleInject from 'style-inject';
 
 const Container = styled.div`
+  position: relative;
   background-color: lightgrey;
   border-radius: 2px;
-
-  ${({open}) =>
-    open
-      ? css`
-          position: fixed;
-          top: 30px;
-          bottom: 30px;
-          left: 30px;
-          right: 30px;
-          z-index: 2000;
-        `
-      : css`
-          height: 100%;
-          width: 100%;
-        `}
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(100%) grayscale(25%);
+  transition: all 0.5s;
+  scale: 1;
+`;
+const Shade = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  font-family: 'Space Grotesk';
+  font-size: 40px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  :hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
 `;
 
 const GridItem = React.forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
-  const flipperClass = shortid.generate();
-
-  const flipperStyle = `
-    .${flipperClass}{
-      grid-column: ${props.gc || 'unset'};
-      grid-row: ${props.gr || 'unset'};
-      height: 100%;
-      width: 100%;
-    }
-`;
-  styleInject(flipperStyle);
 
   return (
-    <Container {...props} ref={ref} open={open}>
-      {props.children}
+    <Container {...props} ref={ref}>
+      <Image src={props.src} />
+      <Shade>{props.title}</Shade>
     </Container>
   );
-  // return (
-  // <Flipper flipKey={open} className={flipperClass}>
-  // <Flipped flipId={'flipped'}>
-  // <Container {...props} onClick={() => setOpen(!open)} open={open}>
-  // {props.children}
-  // </Container>
-  // </Flipped>
-  // </Flipper>
-  // );
 });
 
 export default GridItem;
