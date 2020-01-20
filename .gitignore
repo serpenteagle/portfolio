@@ -3,3 +3,4 @@ node_modules
 *.swo
 *~t
 *.DS_Store
+*.code-workspace
