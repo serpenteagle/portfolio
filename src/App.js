@@ -1,54 +1,68 @@
-import React, {useState, useEffect, useRef} from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-import anime from 'animejs';
-import shortid from 'shortid';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {detect} from 'detect-browser';
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+import anime from "animejs";
+import shortid from "shortid";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { detect } from "detect-browser";
 
-import GridItem from './components/GridItem/GridItem.js';
-import ProjectTemplate from './components/ProjectTemplate/ProjectTemplate.js';
+import GridItem from "./components/GridItem/GridItem.js";
+import ProjectTemplate from "./components/ProjectTemplate/ProjectTemplate.js";
 
-import boschContent from './content/bosch.js';
+import boschContent from "./content/bosch.js";
 
-import holoRender from './assets/holo-render.jpg';
-import kaizenArm from './assets/kaizen-arm.jpg';
-import wn from './assets/wn.jpg';
-import yt from './assets/yt.jpg';
-import dc from './assets/dc.jpg';
+import holoRender from "./assets/holo-render.jpg";
+import kaizenArm from "./assets/kaizen-arm.jpg";
+import wn from "./assets/wn.jpg";
+import yt from "./assets/yt.jpg";
+import dc from "./assets/dc.jpg";
 
-const isChrome = detect().name === 'chrome';
+// const isChrome = detect().name === 'chrome';
+const isChrome = true;
 
+const ContainerWrapper = styled.div`
+  perspective: 18in;
+  transform-style: preserve-3d;
+  width: 100%;
+  overflow: hidden;
+`;
 const Container = styled.div`
-  font-family: 'Space Grotesk';
+  font-family: "Space Grotesk";
+  perspective: 18in;
+  transform-style: preserve-3d;
 `;
 const Border = styled.div`
-  boz-sizing: border-box;
+  box-sizing: border-box;
   border: 16px solid black;
   margin: 26px;
   border-radius: 19px;
   text-align: center;
   padding-bottom: 75px;
+
+  @media (max-width: 500px) {
+    border: none;
+  }
 `;
 const RouterScreen = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: white;
-  pointer-events: ${({go}) => (go ? 'auto' : 'none')};
+  pointer-events: ${({ go }) => (go ? "auto" : "none")};
   opacity: 0;
   overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 10000;
 `;
 const RouterTest = styled.div`
   height: 3000px;
   width: 300px;
-  background-color: ${({bgColor}) => bgColor};
-  opacity: ${({go}) => (go ? 1 : 0)};
+  background-color: ${({ bgColor }) => bgColor};
+  opacity: ${({ go }) => (go ? 1 : 0)};
 `;
 const Title = styled.h1`
-  font-family: 'Space Grotesk';
+  font-family: "Space Grotesk";
   font-size: 81px;
   font-weight: 600;
   color: black;
@@ -57,7 +71,7 @@ const Title = styled.h1`
 `;
 const Highlight = styled.span`
   ::before {
-    content: '  Shashank Rajesh  ';
+    content: "  Shashank Rajesh  ";
     background-color: #19f8fe;
     color: rgba(0, 0, 0, 0);
     position: absolute;
@@ -70,8 +84,8 @@ const Highlight = styled.span`
 const Summary = styled.p`
   display: inline-block;
   text-align: center;
-  width: 970px;
-  font-family: 'Space Grotesk';
+  max-width: 970px;
+  font-family: "Space Grotesk";
   font-size: 22px;
   font-weight: regular;
   text-align: justify;
@@ -101,7 +115,7 @@ const Footer = styled.p`
   display: inline-block;
   text-align: center;
   width: 970px;
-  font-family: 'Space Grotesk';
+  font-family: "Space Grotesk";
   font-size: 22px;
   font-weight: regular;
 `;
@@ -119,7 +133,7 @@ const PleaseBorder = styled.div`
 `;
 
 const PleaseMessage = styled.p`
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 35px;
   text-align: center;
   font-weight: regular;
@@ -132,37 +146,36 @@ const App = props => {
       ref: useRef(null),
       src: holoRender,
       span: 2,
-      title: 'Bosch Holo Robot',
-      flag: true,
+      title: "Bosch Holo Robot",
+      flag: true
     },
     {
       id: shortid.generate(),
       ref: useRef(null),
       src: kaizenArm,
-      title: 'Coming soon',
+      title: "Coming soon"
     },
     {
       id: shortid.generate(),
       ref: useRef(null),
       src: wn,
-      title: 'Coming soon',
+      title: "Coming soon"
     },
     {
       id: shortid.generate(),
       ref: useRef(null),
       src: yt,
-      title: 'Coming soon',
+      title: "Coming soon"
     },
     {
       id: shortid.generate(),
       ref: useRef(null),
       src: dc,
-      title: 'Coming soon',
-    },
+      title: "Coming soon"
+    }
   ]);
   const [open, setOpen] = useState(null);
   const [go, setGo] = useState(false);
-  // const [go, setGo] = useState(true);
 
   const containerRef = useRef(null);
   const routerScreenRef = useRef(null);
@@ -176,35 +189,39 @@ const App = props => {
       const b = [rect.left + rect.width / 2, rect.top + rect.height / 2];
 
       anime({
-        begin: () => setTimeout(() => setGo(true), 750),
+        begin: () => {
+          document.body.style.overflowY = "hidden";
+          setTimeout(() => setGo(true), 750);
+        },
         targets: containerRef.current,
         translateX: `+=${a[0] - b[0]}`,
         translateY: `+=${a[1] - b[1]}`,
-        translateZ: '800px',
+        translateZ: "800px",
         duration: 750,
-        easing: 'easeInOutQuart',
+        easing: "easeInOutQuart"
       });
       anime({
         targets: routerScreenRef.current,
         opacity: 1,
         duration: 750,
-        easing: 'easeInOutQuart',
+        easing: "easeInOutQuart"
       });
     } else {
       anime({
+        begin: () => (document.body.style.overflowY = "scroll"),
         targets: containerRef.current,
         translateX: 0,
         translateY: 0,
         translateZ: 0,
         duration: 1000,
-        easing: 'easeInOutQuint',
+        easing: "easeInOutQuint"
       });
       anime({
         targets: routerScreenRef.current,
         opacity: 0,
         duration: 750,
-        easing: 'easeInOutQuint',
-        complete: () => setGo(false),
+        easing: "easeInOutQuint",
+        complete: () => setGo(false)
       });
     }
   }, [open]);
@@ -212,48 +229,50 @@ const App = props => {
   if (isChrome)
     return (
       <React.Fragment>
-        <Container ref={containerRef}>
-          <Border>
-            <Title>
-              <Highlight> Shashank Rajesh </Highlight>
-            </Title>
+        <ContainerWrapper>
+          <Container ref={containerRef}>
+            <Border>
+              <Title>
+                <Highlight> Shashank Rajesh </Highlight>
+              </Title>
 
-            <Summary>
-              Self taught front-end developer with full-stack knowledge and a
-              background in robotics engineering. Having a keen attention to
-              detail and an obsession with aesthetics, I always strive for the
-              best in my work.
-            </Summary>
+              <Summary>
+                Self taught front-end developer with full-stack knowledge and a
+                background in robotics engineering. Having a keen attention to
+                detail and an obsession with aesthetics, I always strive for the
+                best in my work.
+              </Summary>
 
-            <GridWrapper>
-              <Grid>
-                {gridItems.map((el, i) => (
-                  <GridItem
-                    key={el.id}
-                    ref={el.ref}
-                    src={el.src}
-                    title={el.title}
-                    onClick={() => {
-                      if (el.flag) setOpen(open ? null : el.id);
-                    }}
-                    style={{
-                      gridArea: el.span
-                        ? `span 1 / span ${el.span}`
-                        : 'initial',
-                    }}
-                  />
-                ))}
-              </Grid>
-            </GridWrapper>
+              <GridWrapper>
+                <Grid>
+                  {gridItems.map((el, i) => (
+                    <GridItem
+                      key={el.id}
+                      ref={el.ref}
+                      src={el.src}
+                      title={el.title}
+                      onClick={() => {
+                        if (el.flag) setOpen(open ? null : el.id);
+                      }}
+                      style={{
+                        gridArea: el.span
+                          ? `span 1 / span ${el.span}`
+                          : "initial"
+                      }}
+                    />
+                  ))}
+                </Grid>
+              </GridWrapper>
 
-            <Divider />
+              <Divider />
 
-            <Footer>
-              ShashankRajesh7@gmail.com &nbsp;&nbsp;&nbsp;
-              github.com/serpenteagle &nbsp;&nbsp;&nbsp; 248-567-9425
-            </Footer>
-          </Border>
-        </Container>
+              <Footer>
+                ShashankRajesh7@gmail.com &nbsp;&nbsp;&nbsp;
+                github.com/serpenteagle &nbsp;&nbsp;&nbsp; 248-567-9425
+              </Footer>
+            </Border>
+          </Container>
+        </ContainerWrapper>
 
         <RouterScreen go={go} ref={routerScreenRef}>
           <ProjectTemplate
@@ -262,20 +281,6 @@ const App = props => {
             go={go}
           />
         </RouterScreen>
-
-        {/* <BrowserRouter>
-        <RouterScreen go={go} ref={routerScreenRef}>
-          <Switch>
-            <Route path="/">
-              <ProjectTemplate
-                content={boschContent}
-                onBack={() => setOpen(null)}
-                go={go}
-              />
-            </Route>
-          </Switch>
-        </RouterScreen>
-                        </BrowserRouter>*/}
       </React.Fragment>
     );
   else
