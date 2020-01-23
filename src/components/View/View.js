@@ -23,7 +23,7 @@ const Container = styled.div`
 const Border = styled.div`
   position: relative;
   box-sizing: border-box;
-  border: ${({ mobile }) => (mobile ? "none" : "16px solid black")};
+  border: ${({ mobile }) => (mobile ? "none" : "10px solid black")};
   margin: 26px;
   border-radius: 19px;
 `;
