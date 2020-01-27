@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { withBreakpoints } from "react-breakpoints";
 import anime from "animejs";
@@ -46,23 +46,39 @@ const createZoomAnimation = (targets, xy) =>
 const App = props => {
   const homeContainerRef = useRef(null);
   const pageContainerRef = useRef(null);
-  const zoomAnimationRef = useRef(null);
+  // const zoomAnimationRef = useRef(null);
+  const toRef = useRef(null);
 
   const lastZoomCoords = useRef([0, 0]);
 
-  //
-  useEffect(() => {
-    zoomAnimationRef.current = anime({
-      targets: homeContainerRef.current,
-      duration: 500,
-      autoplay: false,
-      easing: "easeInOutCubic",
-      opacity: 0,
-      translateX: [0, lastZoomCoords[0]],
-      translateY: [0, lastZoomCoords[1]],
-      translateZ: [0, 500]
-    });
-  }, [lastZoomCoords]);
+  // useEffect(() => {
+  //   zoomAnimationRef.current = anime({
+  //     targets: homeContainerRef.current,
+  //     duration: 500,
+  //     autoplay: false,
+  //     easing: "easeInOutCubic",
+  //     opacity: 0,
+  //     translateX: [0, lastZoomCoords[0]],
+  //     translateY: [0, lastZoomCoords[1]],
+  //     translateZ: [0, 500]
+  //   });
+  // }, [lastZoomCoords]);
+
+  useLayoutEffect(() => {
+    if (toRef.current === "/") {
+      const animation = createZoomAnimation(
+        homeContainerRef.current,
+        lastZoomCoords.current
+      );
+
+      animation.seek(500);
+      animation.reverse();
+      animation.play();
+
+      lastZoomCoords.current = [0, 0];
+      toRef.current = null;
+    }
+  }, [toRef.current]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -70,7 +86,13 @@ const App = props => {
         <Switch>
           <Route path="/test">
             <PageContainer ref={pageContainerRef}>
-              <Test />
+              <Test
+                onClick={() => {
+                  props.history.push("/");
+                  // Update to call useLayoutEffect that handles animation
+                  toRef.current = "/";
+                }}
+              />
             </PageContainer>
           </Route>
           <Route path="/">
@@ -79,8 +101,10 @@ const App = props => {
                 onGridItemClick={e => {
                   // Flip signs on each array item
                   const xy = calcOffsetFromCenter(e.target).map(e => -1 * e);
+                  // Store these coords for the return animation
                   lastZoomCoords.current = xy;
 
+                  // Animate zoom in, then push new route
                   const animation = createZoomAnimation(
                     homeContainerRef.current,
                     xy
