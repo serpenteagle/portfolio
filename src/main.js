@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styleInject from "style-inject";
 import ReactBreakpoints from "react-breakpoints";
+import { BrowserRouter } from "react-router-dom";
 
 import App from "./App.js";
 import SandboxApp from "./SandboxApp.js";
@@ -35,10 +36,17 @@ styleInject(`
   body {
     margin: 0;
     padding: 0;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
   }
   #root {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    perspective: 18in;
   }
 `);
 
@@ -50,7 +58,9 @@ const breakpoints = {
 // ReactDOM.render(<App />, document.getElementById("root"));
 ReactDOM.render(
   <ReactBreakpoints breakpoints={breakpoints}>
-    <SandboxApp />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </ReactBreakpoints>,
   document.getElementById("root")
 );

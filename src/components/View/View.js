@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { IconButton, Fab } from "@material-ui/core";
 import { KeyboardBackspace } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+import anime from "animejs";
 
 const useStyles = makeStyles({
   keyboardBackspace: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 const Container = styled.div`
+  background-color: white;
   min-height: 100vh;
 `;
 const Border = styled.div`
@@ -32,10 +34,27 @@ const DesktopBackButton = styled(IconButton)`
   top: 50px;
   left: 50px;
 `;
-const View = props => {
+const View = (props, ref) => {
+  const containerRef = useRef(null);
+  const mountAnimationRef = useRef(null);
+
   const classes = useStyles();
+
+  // componentDidMount
+  useEffect(() => {
+    // Create mount animation and attach to the appropriate ref
+    mountAnimationRef.current = anime({
+      targets: containerRef,
+      duration: 500,
+      opacity: [0, 1],
+      translateY: [100, 0],
+      autoplay: false
+    });
+
+  }, []);
+
   return (
-    <Container>
+    <Container ref={containerRef} style={props.style}>
       <Border mobile={props.mobile}>
         {props.onBack ? (
           props.mobile ? (

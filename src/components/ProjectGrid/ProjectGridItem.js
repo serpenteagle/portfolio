@@ -11,6 +11,7 @@ const Container = styled.div`
   border-radius: 3px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   grid-area: span 1 / span ${props => props.span || "1"};
+  border: 4px solid black;
 `;
 const Shade = styled.div`
   display: flex;
