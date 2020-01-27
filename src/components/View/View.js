@@ -34,27 +34,10 @@ const DesktopBackButton = styled(IconButton)`
   top: 50px;
   left: 50px;
 `;
-const View = (props, ref) => {
-  const containerRef = useRef(null);
-  const mountAnimationRef = useRef(null);
-
+const View = (props) => {
   const classes = useStyles();
-
-  // componentDidMount
-  useEffect(() => {
-    // Create mount animation and attach to the appropriate ref
-    mountAnimationRef.current = anime({
-      targets: containerRef,
-      duration: 500,
-      opacity: [0, 1],
-      translateY: [100, 0],
-      autoplay: false
-    });
-
-  }, []);
-
   return (
-    <Container ref={containerRef} style={props.style}>
+    <Container style={props.style}>
       <Border mobile={props.mobile}>
         {props.onBack ? (
           props.mobile ? (
