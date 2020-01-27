@@ -46,23 +46,9 @@ const createZoomAnimation = (targets, xy) =>
 const App = props => {
   const homeContainerRef = useRef(null);
   const pageContainerRef = useRef(null);
-  // const zoomAnimationRef = useRef(null);
   const toRef = useRef(null);
 
   const lastZoomCoords = useRef([0, 0]);
-
-  // useEffect(() => {
-  //   zoomAnimationRef.current = anime({
-  //     targets: homeContainerRef.current,
-  //     duration: 500,
-  //     autoplay: false,
-  //     easing: "easeInOutCubic",
-  //     opacity: 0,
-  //     translateX: [0, lastZoomCoords[0]],
-  //     translateY: [0, lastZoomCoords[1]],
-  //     translateZ: [0, 500]
-  //   });
-  // }, [lastZoomCoords]);
 
   useLayoutEffect(() => {
     if (toRef.current === "/") {
@@ -98,7 +84,7 @@ const App = props => {
           <Route path="/">
             <HomeContainer ref={homeContainerRef}>
               <Home
-                onGridItemClick={e => {
+                onGridItemClick={(e, route) => {
                   // Flip signs on each array item
                   const xy = calcOffsetFromCenter(e.target).map(e => -1 * e);
                   // Store these coords for the return animation
@@ -109,9 +95,10 @@ const App = props => {
                     homeContainerRef.current,
                     xy
                   );
+
                   animation.finished.then(() => {
                     anime.remove(homeContainerRef.current);
-                    props.history.push("/test");
+                    props.history.push(route);
                   });
                   animation.play();
                 }}

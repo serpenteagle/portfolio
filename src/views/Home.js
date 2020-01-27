@@ -7,17 +7,7 @@ import Typography from "../components/Typography/Typography.js";
 import ProjectGrid from "../components/ProjectGrid/ProjectGrid.js";
 import ProjectGridItem from "../components/ProjectGrid/ProjectGridItem.js";
 
-import image from "../assets/holo-render.jpg";
-
-// const calcOffsetFromCenter = element => {
-//   const rect = element.getBoundingClientRect();
-//   const cx = window.innerWidth / 2;
-//   const cy = window.innerHeight / 2;
-//   const ex = rect.left + rect.width / 2;
-//   const ey = rect.top + rect.height / 2;
-
-//   return [ex - cx, ey - cy];
-// };
+import holoRender from "../assets/holo-render.jpg";
 
 const ProjectImage = styled.img`
   width: 100%;
@@ -26,6 +16,11 @@ const ProjectImage = styled.img`
   filter: brightness(100%) grayscale(25%);
   transition: all 0.5s;
 `;
+
+const gridItems = [
+  { title: "Bosch Holo", route: "/test", image: holoRender, span: 2 },
+  { title: "Bosch Holo", route: "/test", image: holoRender }
+];
 
 const Home = React.forwardRef((props, ref) => {
   return (
@@ -39,35 +34,42 @@ const Home = React.forwardRef((props, ref) => {
             aesthetics, something something, something something.
           </Typography>
           <ProjectGrid>
-            <ProjectGridItem
-              onClick={props.onGridItemClick}
-              // onClick={e => {
-              //   const [ox, oy] = calcOffsetFromCenter(e.target);
-              //   props.setContainerTransform([-ox, -oy, 750]);
-              // }}
+            {gridItems.map((item, index) => (
+              <ProjectGridItem
+                onClick={e => props.onGridItemClick(e, item.route)}
+                title={item.title || "Untitled"}
+                span={item.span}
+                key={index}
+              >
+                <ProjectImage src={item.image} />
+              </ProjectGridItem>
+            ))}
+
+            {/* <ProjectGridItem
+              onClick={e => props.onGridItemClick(e, "/test")}
               span="2"
               title="Bosch Holo"
             >
-              <ProjectImage src={image} />
+              <ProjectImage src={holoRender} />
             </ProjectGridItem>
             <ProjectGridItem>
-              <ProjectImage src={image} />
+              <ProjectImage src={holoRender} />
             </ProjectGridItem>
             <ProjectGridItem>
-              <ProjectImage src={image} />
+              <ProjectImage src={holoRender} />
             </ProjectGridItem>
             <ProjectGridItem span="2">
-              <ProjectImage src={image} />
+              <ProjectImage src={holoRender} />
             </ProjectGridItem>
             <ProjectGridItem>
-              <ProjectImage src={image} />
+              <ProjectImage src={holoRender} />
             </ProjectGridItem>
             <ProjectGridItem>
-              <ProjectImage src={image} />
+              <ProjectImage src={holoRender} />
             </ProjectGridItem>
             <ProjectGridItem>
-              <ProjectImage src={image} />
-            </ProjectGridItem>
+              <ProjectImage src={holoRender} />
+            </ProjectGridItem> */}
           </ProjectGrid>
         </ArticleSection>
       </Article>
