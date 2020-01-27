@@ -34,18 +34,18 @@ const DesktopBackButton = styled(IconButton)`
   top: 50px;
   left: 50px;
 `;
-const View = (props) => {
+const View = props => {
   const classes = useStyles();
   return (
     <Container style={props.style}>
       <Border mobile={props.mobile}>
         {props.onBack ? (
           props.mobile ? (
-            <Fab className={classes.backFab}>
+            <Fab className={classes.backFab} onClick={props.onBack}>
               <KeyboardBackspace />
             </Fab>
           ) : (
-            <DesktopBackButton>
+            <DesktopBackButton onClick={props.onBack}>
               <KeyboardBackspace
                 classes={{ root: classes.keyboardBackspace }}
               />
