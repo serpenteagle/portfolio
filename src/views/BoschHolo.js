@@ -15,7 +15,7 @@ import galleryIcon from '../assets/gallery-icon.svg'
 
 const BoschHolo = props => {
   return (
-    <View onBack={() => undefined}>
+    <View onBack={props.onBack}>
       <Article>
         <ArticleSection>
           <Typography variant="h1">Bosch Holo Robot</Typography>
