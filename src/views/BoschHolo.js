@@ -11,6 +11,12 @@ import IconLink from "../components/IconLink/IconLink";
 
 import holoRender from "../assets/holo-render.jpg";
 import holoCad from "../assets/holo-cad.jpg";
+import holoAssembly from "../assets/holo-assembly.jpg";
+import holoFea from "../assets/holo-fea.jpg";
+import holoFinal from "../assets/holo-final.jpg";
+import holoWiring from "../assets/holo-wiring.jpg";
+import omniWheel from "../assets/omni-wheel.jpg";
+
 import galleryIcon from "../assets/gallery-icon.svg";
 
 const BoschHolo = props => {
@@ -35,35 +41,58 @@ const BoschHolo = props => {
             and delivered. It went on to premier at several events, including
             CES at Las Vegas.
           </Typography>
-          <ImageWithCaption src={holoRender} caption="CAD Render" />
+          <ImageWithCaption src={holoRender} caption="CAD render" />
         </ArticleSection>
         <ArticleSection>
-          <ImageWithText src={holoCad} caption="3D CAD Drawing">
+          <ImageWithText src={omniWheel} caption="Omni wheel">
             A holonomic robot is a robot which has the ability to move in any
             direction without changing its orientation. This is made possible by
             combining force vectors from the 4 independent roller-wheels located
             on the corners of the robot.
           </ImageWithText>
-          <ImageWithText src={holoCad} caption="3D CAD Drawing" flipped>
+          <ImageWithText src={holoCad} caption="3D CAD drawing" flipped>
             The robot was fully drawn and designed with the industry standard
             the Dassault Systèmes SOLIDWORKS CAD package. After completion,
             drawings and CNC G Codes were generated for fabrication.
           </ImageWithText>
-          <ImageWithText src={holoCad} caption="3D CAD Drawing" flipped>
+          <ImageWithText
+            src={holoFea}
+            caption="FEA analysis results (exaggerated)"
+            flipped
+          >
             In order to ensure the structural integrity of the superstrucure,
             the aluminum frame was tested using FEA (Finite Element Analysis).
             Although designed to hold up to 200 lbs, the frame turned out to
             have a safety factor of over 40!
           </ImageWithText>
-          <ImageWithText src={holoCad} caption="3D CAD Drawing">
-            A holonomic robot is a robot which has the ability to move in any
-            direction without changing its orientation. This is made possible by
-            combining force vectors from the 4 independent roller-wheels located
-            on the corners of the robot.
+          <ImageWithText
+            src={holoAssembly}
+            caption="Assembly of the superstructure"
+          >
+            With the design finialized, drawings were created and parts were
+            fabricated in house using machines like the CNC mill. Riveted
+            contruction allowed for quick assembly once the parts were
+            manufactured.
+          </ImageWithText>
+          <ImageWithText src={holoWiring} caption="Wiring and programming">
+            Wiring took place immediately after assembly and welding. The
+            components and wire lengths were preconfigured in order to
+            accelerate the production of the bot. The controller was programmed
+            in C# using the .NET framework.
+          </ImageWithText>
+          <ImageWithText src={holoFinal} caption="Final" flipped>
+            The final product was completed in under 2 weeks and delived to
+            Bosch with huge success. The project was featured at multiple events
+            including the Detroit Auto Show and CES Las Vegas.
           </ImageWithText>
         </ArticleSection>
         <ArticleSection style={{ display: "flex", justifyContent: "center" }}>
-          <IconLink src={galleryIcon} href="https://goo.gl/photos/5EEE6o2sPivvAmh16">SEE GALLERY</IconLink>
+          <IconLink
+            src={galleryIcon}
+            href="https://goo.gl/photos/5EEE6o2sPivvAmh16"
+          >
+            SEE GALLERY
+          </IconLink>
         </ArticleSection>
       </Article>
     </View>
