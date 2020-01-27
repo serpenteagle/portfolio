@@ -23,19 +23,25 @@ const Image = styled.img`
   border: 3px solid black;
   border-radius: 3px;
 `;
-const Caption = styled.figcaption`
-  text-align: ${({ flipped }) => (flipped ? "right" : "left")};
-  font-family: ${props => props.theme.fontFamily};
-`;
+// const Caption = styled.figcaption`
+//   text-align: ${({ flipped }) => (flipped ? "right" : "left")};
+//   font-family: ${props => props.theme.fontFamily};
+// `;
 
 const ImageWithText = props => {
   return (
     <Container>
       <ImageContainer flipped={props.flipped}>
         <Image flipped={props.flipped} src={props.src} />
-        <Caption flipped={props.flipped}>
+        {/* <Caption flipped={props.flipped}>
           <Caption>{props.caption}</Caption>
-        </Caption>
+        </Caption> */}
+        <Typography
+          variant="figcaption"
+          style={{ textAlign: props.flipped ? "right" : "left" }}
+        >
+          {props.caption}
+        </Typography>
       </ImageContainer>
       <Typography variant="p" style={{ flexGrow: "1", textAlign: "justify" }}>
         {props.children}

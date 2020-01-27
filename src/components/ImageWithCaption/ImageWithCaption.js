@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Typography from "../Typography/Typography";
 
 const Container = styled.figure`
   width: 100%;
@@ -15,16 +16,14 @@ const Image = styled.img`
   border: 3px solid black;
   border-radius: 3px;
 `;
-const Caption = styled.figcaption`
-  text-align: center;
-  font-family: ${props => props.theme.fontFamily};
-`;
 
 const ImageWithCaption = props => {
   return (
     <Container>
       <Image src={props.src} />
-      <Caption>{props.caption}</Caption>
+      <Typography style={{ textAlign: "center" }} variant="figcaption">
+        {props.caption}
+      </Typography>
     </Container>
   );
 };

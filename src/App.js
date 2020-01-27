@@ -18,6 +18,11 @@ const theme = {
     fontFamily: "Space Grotesk",
     fontWeight: "400",
     fontSize: "24px"
+  },
+  figcaption: {
+    fontFamily: "Space Grotesk",
+    fontWeight: "400",
+    fontSize: "16px"
   }
 };
 
@@ -35,9 +40,9 @@ const Test = styled.div`
 const createZoomAnimation = (targets, xy) =>
   anime({
     targets: targets,
-    duration: 500,
+    duration: 750,
     autoplay: false,
-    easing: "easeInOutCubic",
+    easing: "easeInOutQuart",
     opacity: 0,
     translateX: [0, xy[0]],
     translateY: [0, xy[1]],
@@ -58,7 +63,7 @@ const App = props => {
         lastZoomCoords.current
       );
 
-      animation.seek(500);
+      animation.seek(750);
       animation.reverse();
       animation.play();
 

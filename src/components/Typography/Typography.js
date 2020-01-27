@@ -15,6 +15,13 @@ const P = styled.p`
     font-size: ${theme.p.fontSize}
   `}
 `;
+const FigCaption = styled.figcaption`
+  ${({ theme }) => `
+    font-family: ${theme.figcaption.fontFamily}
+    font-weight: ${theme.figcaption.fontWeight}
+    font-size: ${theme.figcaption.fontSize}
+  `}
+`;
 
 const Typography = props => {
   switch (props.variant) {
@@ -25,6 +32,9 @@ const Typography = props => {
     case "p":
       return <P style={props.style}>{props.children}</P>;
       break;
+
+    case "figcaption":
+      return <FigCaption {...props}>{props.children}</FigCaption>;
 
     default:
       return <P style={props.style}>{props.children}</P>;

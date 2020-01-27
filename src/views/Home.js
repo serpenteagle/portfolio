@@ -16,6 +16,11 @@ const ProjectImage = styled.img`
   filter: brightness(95%) grayscale(25%);
   transition: all 0.5s;
 `;
+const Divider = styled.div`
+  background-color: black;
+  height: 2px;
+`;
+const Footer = styled.div``;
 
 // const gridItems = [
 //   { title: "Bosch Holo", route: "/test", image: holoRender, span: 2 },
@@ -28,7 +33,10 @@ const Home = React.forwardRef((props, ref) => {
       <Article>
         <ArticleSection>
           <Typography variant="h1">Shashank Rajesh</Typography>
-          <Typography variant="p" style={{ textAlign: "justify", lineHeight: 1.5, marginTop: 0}}>
+          <Typography
+            variant="p"
+            style={{ textAlign: "justify", lineHeight: 1.5, marginTop: 0 }}
+          >
             A self-taught Front End & Full Stack Developer with a background in
             Robotics Engineering. Detail oriented and loves to learn and grow.
             With over 4 years of rigorous experience in competitive robotics,
@@ -50,33 +58,19 @@ const Home = React.forwardRef((props, ref) => {
                 <ProjectImage src={item.image} />
               </ProjectGridItem>
             ))}
-
-            {/* <ProjectGridItem
-              onClick={e => props.onGridItemClick(e, "/test")}
-              span="2"
-              title="Bosch Holo"
-            >
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem>
-            <ProjectGridItem>
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem>
-            <ProjectGridItem>
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem>
-            <ProjectGridItem span="2">
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem>
-            <ProjectGridItem>
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem>
-            <ProjectGridItem>
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem>
-            <ProjectGridItem>
-              <ProjectImage src={holoRender} />
-            </ProjectGridItem> */}
           </ProjectGrid>
+
+          <Divider />
+
+          <Footer>
+            <Typography variant="p">
+              ShashankRajesh7@gmail.com&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://www.github.com/serpenteagle" target="_blank">
+                github.com/serpenteagle
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;248-567-9425
+            </Typography>
+          </Footer>
         </ArticleSection>
       </Article>
     </View>

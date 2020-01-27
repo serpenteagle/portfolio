@@ -14,7 +14,7 @@ const Icon = styled.img``;
 
 const IconLink = props => {
   return (
-    <Container href={props.href}>
+    <Container href={props.href} target="_blank">
       <Typography>{props.children}</Typography>
       <Icon src={props.src} />
     </Container>

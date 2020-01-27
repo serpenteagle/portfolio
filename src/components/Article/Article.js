@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   padding-top: 50px;
-  padding-bottom: 180px;
+  padding-bottom: 50;
   justify-content: center;
   text-align: center;
 `;
@@ -20,7 +20,7 @@ const SectionContainer = styled.div`
 
 const Article = props => {
   return (
-    <Container>
+    <Container {...props}>
       <SectionContainer>{props.children}</SectionContainer>
     </Container>
   );

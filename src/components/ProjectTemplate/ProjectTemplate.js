@@ -15,7 +15,7 @@ const Container = styled.div`
   opacity: 0;
 `;
 const Border = styled.div`
-  boz-sizing: border-box;
+  box-sizing: border-box;
   min-height: calc(100vh - 52px);
   border: 16px solid black;
   margin: 26px;

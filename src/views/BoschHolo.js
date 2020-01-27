@@ -11,12 +11,12 @@ import IconLink from "../components/IconLink/IconLink";
 
 import holoRender from "../assets/holo-render.jpg";
 import holoCad from "../assets/holo-cad.jpg";
-import galleryIcon from '../assets/gallery-icon.svg'
+import galleryIcon from "../assets/gallery-icon.svg";
 
 const BoschHolo = props => {
   return (
     <View onBack={props.onBack}>
-      <Article>
+      <Article style={{ padding: 0 }}>
         <ArticleSection>
           <Typography variant="h1">Bosch Holo Robot</Typography>
           <Typography variant="p" style={{ textAlign: "justify" }}>
@@ -63,7 +63,7 @@ const BoschHolo = props => {
           </ImageWithText>
         </ArticleSection>
         <ArticleSection style={{ display: "flex", justifyContent: "center" }}>
-          <IconLink src={galleryIcon} href="google.com">See Gallery</IconLink>
+          <IconLink src={galleryIcon} href="https://goo.gl/photos/5EEE6o2sPivvAmh16">SEE GALLERY</IconLink>
         </ArticleSection>
       </Article>
     </View>
