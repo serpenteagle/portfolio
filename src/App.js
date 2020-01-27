@@ -55,8 +55,16 @@ const App = props => {
   const toRef = useRef(null);
 
   const lastZoomCoords = useRef([0, 0]);
+  const lastHomeScroll = useRef(0);
+
+  useEffect(() => {
+    // Set scroll to 0 when routing to a new page
+    const root = document.getElementById("root");
+    if (props.location.pathname !== "/") root.scrollTop = 0;
+  }, [props.location.pathname]);
 
   useLayoutEffect(() => {
+    // Create and play return animation when going to home
     if (toRef.current === "/") {
       const animation = createZoomAnimation(
         homeContainerRef.current,
@@ -65,6 +73,11 @@ const App = props => {
 
       animation.seek(750);
       animation.reverse();
+
+      // Restore previous scroll position of home
+      const root = document.getElementById("root");
+      root.scrollTop = lastHomeScroll.current;
+
       animation.play();
 
       lastZoomCoords.current = [0, 0];
@@ -121,6 +134,10 @@ const App = props => {
                   const xy = calcOffsetFromCenter(e.target).map(e => -1 * e);
                   // Store these coords for the return animation
                   lastZoomCoords.current = xy;
+
+                  // Record scroll position of home for later restoration
+                  const root = document.getElementById("root");
+                  lastHomeScroll.current = root.scrollTop;
 
                   // Animate zoom in, then push new route
                   const animation = createZoomAnimation(
