@@ -28,15 +28,21 @@ const Home = React.forwardRef((props, ref) => {
       <Article>
         <ArticleSection>
           <Typography variant="h1">Shashank Rajesh</Typography>
-          <Typography variant="p" style={{ textAlign: "justify" }}>
-            Self taught front-end developer with a background in robotics
-            engineering. Having a keen attention to detail and an obsession with
-            aesthetics, something something, something something.
+          <Typography variant="p" style={{ textAlign: "justify", lineHeight: 1.5, marginTop: 0}}>
+            A self-taught Front End & Full Stack Developer with a background in
+            Robotics Engineering. Detail oriented and loves to learn and grow.
+            With over 4 years of rigorous experience in competitive robotics,
+            and having lead multiple teams on numerous projects, I understand
+            what it takes to create successful solutions to real world problems.
           </Typography>
           <ProjectGrid>
             {views.map((item, index) => (
               <ProjectGridItem
-                onClick={item.component ? e => props.onGridItemClick(e, item.route) : undefined}
+                onClick={
+                  item.component
+                    ? e => props.onGridItemClick(e, item.route)
+                    : undefined
+                }
                 title={item.title || "Untitled"}
                 span={item.span}
                 key={index}

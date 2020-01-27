@@ -27,7 +27,7 @@ const Border = styled.div`
   box-sizing: border-box;
   border: ${({ mobile }) => (mobile ? "none" : "10px solid black")};
   margin: 26px;
-  border-radius: 19px;
+  border-radius: 10px;
 `;
 const DesktopBackButton = styled(IconButton)`
   position: absolute;
