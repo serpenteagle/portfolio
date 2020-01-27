@@ -14,6 +14,7 @@ const sandbox = {
     contentBase: path.join(__dirname, 'sandbox'),
     port: 9000,
     hot: true,
+    historyApiFallback: true
   },
 };
 
