@@ -13,7 +13,7 @@ const ProjectImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(100%) grayscale(25%);
+  filter: brightness(95%) grayscale(25%);
   transition: all 0.5s;
 `;
 
