@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, keyframes } from "styled-components";
 import { withBreakpoints } from "react-breakpoints";
 import anime from "animejs";
 import { Switch, Route, withRouter } from "react-router-dom";
@@ -26,10 +26,23 @@ const theme = {
   }
 };
 
+const dropIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`;
+
 const Container = styled.div`
   transform-style: preserve-3d;
 `;
-const PageContainer = styled.div``;
+const PageContainer = styled.div`
+  animation: ${dropIn} .4s ease-in-out;
+`;
 const HomeContainer = styled.div``;
 const Test = styled.div`
   height: 100px;
