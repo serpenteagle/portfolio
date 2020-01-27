@@ -1,4 +1,5 @@
 import BoschHolo from "./BoschHolo";
+import FRC from "./FRC";
 
 import holoRender from "../assets/holo-render.jpg";
 import kaizenArm from "../assets/kaizen-arm.jpg";
@@ -11,12 +12,17 @@ import dayCounter from "../assets/day-counter.jpg";
 export default [
   {
     title: "Bosch Holo",
-    route: "/test",
+    route: "/bosch",
     image: holoRender,
     component: BoschHolo,
     span: 2
   },
-  { title: "Coming Soon", image: kaizenArm },
+  {
+    title: "South Lyon Robotics",
+    route: "/slr",
+    component: FRC,
+    image: kaizenArm
+  },
   { title: "Coming Soon", image: portfolio },
   { title: "Coming Soon", image: issueTracker, span: 2 },
   { title: "Coming Soon", image: youtube },
