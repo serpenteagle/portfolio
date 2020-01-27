@@ -6,6 +6,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import { calcOffsetFromCenter } from "./helpers/helpers";
 
 import Home from "./views/Home.js";
+import views from "./views/views";
 
 const theme = {
   h1: {
@@ -70,7 +71,7 @@ const App = props => {
     <ThemeProvider theme={theme}>
       <Container>
         <Switch>
-          <Route path="/test">
+          {/* <Route path="/test">
             <PageContainer ref={pageContainerRef}>
               <Test
                 onClick={() => {
@@ -80,7 +81,29 @@ const App = props => {
                 }}
               />
             </PageContainer>
-          </Route>
+          </Route> */}
+
+          {views.map((item, index) => (
+            <Route path={item.route} key={index}>
+              <PageContainer ref={pageContainerRef}>
+                {/* {React.cloneElement(item.component, {
+                  onBack: () => {
+                    props.history.push("/");
+                    // Update to call useLayoutEffect that handles animation
+                    toRef.current = "/";
+                  }
+                })} */}
+                <item.component
+                  onBack={() => {
+                    props.history.push("/");
+                    // Update to call useLayoutEffect that handles animation
+                    toRef.current = "/";
+                  }}
+                />
+              </PageContainer>
+            </Route>
+          ))}
+
           <Route path="/">
             <HomeContainer ref={homeContainerRef}>
               <Home

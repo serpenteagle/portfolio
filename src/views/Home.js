@@ -7,7 +7,7 @@ import Typography from "../components/Typography/Typography.js";
 import ProjectGrid from "../components/ProjectGrid/ProjectGrid.js";
 import ProjectGridItem from "../components/ProjectGrid/ProjectGridItem.js";
 
-import holoRender from "../assets/holo-render.jpg";
+import views from "./views";
 
 const ProjectImage = styled.img`
   width: 100%;
@@ -17,10 +17,10 @@ const ProjectImage = styled.img`
   transition: all 0.5s;
 `;
 
-const gridItems = [
-  { title: "Bosch Holo", route: "/test", image: holoRender, span: 2 },
-  { title: "Bosch Holo", route: "/test", image: holoRender }
-];
+// const gridItems = [
+//   { title: "Bosch Holo", route: "/test", image: holoRender, span: 2 },
+//   { title: "Bosch Holo", route: "/test", image: holoRender }
+// ];
 
 const Home = React.forwardRef((props, ref) => {
   return (
@@ -34,7 +34,7 @@ const Home = React.forwardRef((props, ref) => {
             aesthetics, something something, something something.
           </Typography>
           <ProjectGrid>
-            {gridItems.map((item, index) => (
+            {views.map((item, index) => (
               <ProjectGridItem
                 onClick={e => props.onGridItemClick(e, item.route)}
                 title={item.title || "Untitled"}
