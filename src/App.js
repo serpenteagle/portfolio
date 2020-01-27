@@ -83,26 +83,30 @@ const App = props => {
             </PageContainer>
           </Route> */}
 
-          {views.map((item, index) => (
-            <Route path={item.route} key={index}>
-              <PageContainer ref={pageContainerRef}>
-                {/* {React.cloneElement(item.component, {
+          {views.map((item, index) =>
+            item.component ? (
+              <Route path={item.route} key={index}>
+                <PageContainer ref={pageContainerRef}>
+                  {/* {React.cloneElement(item.component, {
                   onBack: () => {
                     props.history.push("/");
                     // Update to call useLayoutEffect that handles animation
                     toRef.current = "/";
                   }
                 })} */}
-                <item.component
-                  onBack={() => {
-                    props.history.push("/");
-                    // Update to call useLayoutEffect that handles animation
-                    toRef.current = "/";
-                  }}
-                />
-              </PageContainer>
-            </Route>
-          ))}
+                  <item.component
+                    onBack={() => {
+                      props.history.push("/");
+                      // Update to call useLayoutEffect that handles animation
+                      toRef.current = "/";
+                    }}
+                  />
+                </PageContainer>
+              </Route>
+            ) : (
+              undefined
+            )
+          )}
 
           <Route path="/">
             <HomeContainer ref={homeContainerRef}>

@@ -10,5 +10,5 @@ export default [
     component: BoschHolo,
     span: 2
   },
-  { title: "Bosch Holo", route: "/test", component: BoschHolo, image: holoRender }
+  { title: "Coming Soon", route: "/test", image: holoRender }
 ];

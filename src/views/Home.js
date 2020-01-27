@@ -36,7 +36,7 @@ const Home = React.forwardRef((props, ref) => {
           <ProjectGrid>
             {views.map((item, index) => (
               <ProjectGridItem
-                onClick={e => props.onGridItemClick(e, item.route)}
+                onClick={item.component ? e => props.onGridItemClick(e, item.route) : undefined}
                 title={item.title || "Untitled"}
                 span={item.span}
                 key={index}
