@@ -8,6 +8,7 @@ import issueTracker from "../assets/issue-tracker.jpg";
 import youtube from "../assets/youtube.jpg";
 import upNext from "../assets/up-next.jpg";
 import dayCounter from "../assets/day-counter.jpg";
+import Portfolio from "./Portfolio";
 
 export default [
   {
@@ -23,7 +24,12 @@ export default [
     component: FRC,
     image: kaizenArm
   },
-  { title: "Coming Soon", image: portfolio },
+  {
+    title: "Portfolio Website",
+    route: "/portfolio",
+    component: Portfolio,
+    image: portfolio
+  },
   { title: "Coming Soon", image: issueTracker, span: 2 },
   { title: "Coming Soon", image: youtube },
   { title: "Coming Soon", image: upNext },
