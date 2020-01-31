@@ -53,7 +53,7 @@ const FRC = props => {
             only did this gearbox serve the drivetrain, but it could also shift
             into power takoff mode (PTO) and supply massive energy into the
             climbing mechanism on the robot. In addition, it also features a 2
-            speed shifter to allowe for quick acceleration of the robot.
+            speed shifter to allows for quick acceleration of the robot.
           </ImageWithText>
           <ImageWithText src={fuelBlaster} caption="Fuel blaster" flipped>
             In the same year, I also designed the fuel blaster of the robot.
