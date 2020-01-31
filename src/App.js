@@ -7,6 +7,7 @@ import { calcOffsetFromCenter } from "./helpers/helpers";
 
 import Home from "./views/Home.js";
 import views from "./views/views";
+import MobilePlaceholder from "./views/MobilePlaceholder";
 
 const theme = {
   h1: {
@@ -41,7 +42,7 @@ const Container = styled.div`
   transform-style: preserve-3d;
 `;
 const PageContainer = styled.div`
-  animation: ${dropIn} .4s ease-in-out;
+  animation: ${dropIn} 0.4s ease-in-out;
 `;
 const HomeContainer = styled.div``;
 const Test = styled.div`
@@ -98,7 +99,9 @@ const App = props => {
     }
   }, [toRef.current]);
 
-  return (
+  return props.currentBreakpoint === "mobile" ? (
+    <MobilePlaceholder />
+  ) : (
     <ThemeProvider theme={theme}>
       <Container>
         <Switch>

@@ -52,7 +52,7 @@ styleInject(`
 
 const breakpoints = {
   mobile: 300,
-  desktop: 800
+  desktop: 1100
 };
 
 // ReactDOM.render(<App />, document.getElementById("root"));
