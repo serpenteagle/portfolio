@@ -1,15 +1,8 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import anime from 'animejs';
 
 import backArrow from '../../assets/back-arrow.svg';
-
-// const Container = styled.div`
-// opacity: ${({go}) => (go ? '1' : '0')};
-// transform: ${({go}) =>
-// go ? 'translate3d(0, 0, 0)' : 'translate3d(0, -500px, 300px)'}
-// transition: opacity 1s, transform 1s;
-// `;
 
 const Container = styled.div`
   opacity: 0;
@@ -93,11 +86,11 @@ const LinkImage = styled.img`
   height: 200px;
 `;
 
-const ProjectTemplate = props => {
+const ProjectTemplate = (props) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    let animation = anime({
+    const animation = anime({
       targets: containerRef.current,
       duration: 300,
       opacity: [0, 1],
@@ -124,35 +117,33 @@ const ProjectTemplate = props => {
           <Summary>{props.content.summary}</Summary>
 
           {props.content.slices.map((el, i) => {
-            if (i % 2 === 0)
+            if (i % 2 === 0) {
               return (
                 <SliceBox key={i}>
-                  <SliceText style={{textAlign: 'right', marginRight: '47px'}}>
+                  <SliceText style={{ textAlign: 'right', marginRight: '47px' }}>
                     {el.text}
                   </SliceText>
                   <SliceImage src={el.src} />
                 </SliceBox>
               );
-            else
-              return (
-                <SliceBox key={i}>
-                  <SliceImage src={el.src} />
-                  <SliceText style={{textAlign: 'left', marginLeft: '47px'}}>
-                    {el.text}
-                  </SliceText>
-                </SliceBox>
-              );
+            }
+            return (
+              <SliceBox key={i}>
+                <SliceImage src={el.src} />
+                <SliceText style={{ textAlign: 'left', marginLeft: '47px' }}>
+                  {el.text}
+                </SliceText>
+              </SliceBox>
+            );
           })}
 
           <LinksBox>
-            {props.content.links.map(el => {
-              return (
-                <LinkContainer href={el.href} target="_blank" key={el.text}>
-                  <LinkText>{el.text}</LinkText>
-                  <LinkImage src={el.src} />
-                </LinkContainer>
-              );
-            })}
+            {props.content.links.map((el) => (
+              <LinkContainer href={el.href} target="_blank" key={el.text}>
+                <LinkText>{el.text}</LinkText>
+                <LinkImage src={el.src} />
+              </LinkContainer>
+            ))}
           </LinksBox>
         </Content>
       </Border>

@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -18,12 +19,19 @@ const SectionContainer = styled.div`
   }
 `;
 
-const Article = props => {
-  return (
-    <Container {...props}>
-      <SectionContainer>{props.children}</SectionContainer>
-    </Container>
-  );
+const Article = ({ style, children }) => (
+  <Container style={style}>
+    <SectionContainer>{children}</SectionContainer>
+  </Container>
+);
+
+Article.propTypes = {
+  style: PropTypes.objectOf(PropTypes.string),
+  children: PropTypes.arrayOf(PropTypes.element),
+};
+Article.defaultProps = {
+  style: undefined,
+  children: undefined,
 };
 
 export default Article;

@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Typography from "../Typography/Typography";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Typography from '../Typography/Typography';
 
 const Container = styled.figure`
   width: 100%;
@@ -17,15 +18,21 @@ const Image = styled.img`
   border-radius: 3px;
 `;
 
-const ImageWithCaption = props => {
-  return (
-    <Container>
-      <Image src={props.src} />
-      <Typography style={{ textAlign: "center" }} variant="figcaption">
-        {props.caption}
-      </Typography>
-    </Container>
-  );
+const ImageWithCaption = ({ src, caption }) => (
+  <Container>
+    <Image src={src} />
+    <Typography style={{ textAlign: 'center' }} variant="figcaption">
+      {caption}
+    </Typography>
+  </Container>
+);
+
+ImageWithCaption.propTypes = {
+  src: PropTypes.string.isRequired,
+  caption: PropTypes.string,
+};
+ImageWithCaption.defaultProps = {
+  caption: undefined,
 };
 
 export default ImageWithCaption;

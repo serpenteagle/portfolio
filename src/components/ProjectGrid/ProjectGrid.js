@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Grid = styled.div`
@@ -7,16 +8,21 @@ const Grid = styled.div`
   grid-template-rows: 1fr;
   grid-auto-rows: 1fr;
   grid-gap: 25px;
-  height: ${props => props.height || 'auto'};
-  width: ${props => props.width || '100%'};
+  height: ${(props) => props.height || 'auto'};
+  width: ${(props) => props.width || '100%'};
 `;
 
-const ProjectGrid = props => {
-  return (
-    <Grid>
-      {props.children}
-    </Grid>
-  );
-}
+const ProjectGrid = ({ children }) => (
+  <Grid>
+    {children}
+  </Grid>
+);
+
+ProjectGrid.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element),
+};
+ProjectGrid.defaultProps = {
+  children: undefined,
+};
 
 export default ProjectGrid;

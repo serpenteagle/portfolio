@@ -1,35 +1,36 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import styleInject from "style-inject";
-import ReactBreakpoints from "react-breakpoints";
-import { BrowserRouter } from "react-router-dom";
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import styleInject from 'style-inject';
+import ReactBreakpoints from 'react-breakpoints';
+import { BrowserRouter } from 'react-router-dom';
 
-import App from "./App.js";
-import SandboxApp from "./SandboxApp.js";
+import App from './App';
+import SandboxApp from './SandboxApp';
 
 // Inject font styles into <head></head>
 styleInject(`
   @font-face {
     font-family: 'Space Grotesk';
     src: url(${
-      require("./assets/fonts/SpaceGrotesk-Regular.woff").default
-    }) format('woff');
+  require('./assets/fonts/SpaceGrotesk-Regular.woff').default
+}) format('woff');
     font-weight: 400;
   }
 
   @font-face {
     font-family: 'Space Grotesk';
     src: url(${
-      require("./assets/fonts/SpaceGrotesk-Medium.woff").default
-    }) format('woff');
+  require('./assets/fonts/SpaceGrotesk-Medium.woff').default
+}) format('woff');
     font-weight: 500;
   }
 
   @font-face {
     font-family: 'Space Grotesk';
     src: url(${
-      require("./assets/fonts/SpaceGrotesk-SemiBold.woff").default
-    }) format('woff');
+  require('./assets/fonts/SpaceGrotesk-SemiBold.woff').default
+}) format('woff');
     font-weight: 600;
   }
 
@@ -52,7 +53,7 @@ styleInject(`
 
 const breakpoints = {
   mobile: 300,
-  desktop: 1100
+  desktop: 1100,
 };
 
 // ReactDOM.render(<App />, document.getElementById("root"));
@@ -62,5 +63,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </ReactBreakpoints>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

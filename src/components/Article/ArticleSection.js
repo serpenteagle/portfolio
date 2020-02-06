@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const Container = styled.div`
   /* &:not(:last-child) {
@@ -10,8 +11,9 @@ const Container = styled.div`
   }
 `;
 
-const ArticleSection = props => {
-  return <Container>{props.children}</Container>;
-};
+const ArticleSection = ({ children }) => <Container>{children}</Container>;
+
+ArticleSection.propTypes = { children: PropTypes.arrayOf(PropTypes.element) };
+ArticleSection.defaultProps = { children: PropTypes.arrayOf(PropTypes.children) };
 
 export default ArticleSection;
